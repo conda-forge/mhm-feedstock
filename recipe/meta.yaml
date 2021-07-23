@@ -10,7 +10,7 @@ source:
   sha256: cd63882b74d7f808eca029bd4b8a986174c72329e50b957e7f50b0c81bd503f3
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
 
 requirements:
@@ -28,8 +28,16 @@ requirements:
     - netcdf-fortran
 
 test:
+  source_files:
+    - mhm.nml
+    - mhm_outputs.nml
+    - mhm_parameter.nml
+    - mrm_outputs.nml
+    - test_domain
+    - test_domain_2
+
   commands:
-    - which mhm
+    - mhm
 
 about:
   home: https://www.ufz.de/mhm
