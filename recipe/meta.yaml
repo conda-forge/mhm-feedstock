@@ -28,8 +28,16 @@ requirements:
     - netcdf-fortran
 
 test:
+  source_files:
+    - mhm.nml
+    - mhm_outputs.nml
+    - mhm_parameter.nml
+    - mrm_outputs.nml
+    - test_domain
+    - test_domain_2
+
   commands:
-    - which mhm
+    - mhm
 
 about:
   home: https://www.ufz.de/mhm
