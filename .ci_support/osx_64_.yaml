@@ -14,8 +14,5 @@ macos_machine:
 - x86_64-apple-darwin13.4.0
 netcdf_fortran:
 - '4.6'
-pin_run_as_build:
-  netcdf-fortran:
-    max_pin: x.x
 target_platform:
 - osx-64
