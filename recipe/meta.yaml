@@ -1,5 +1,5 @@
 {% set name = "mhm" %}
-{% set version = "5.11.2" %}
+{% set version = "5.12.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://git.ufz.de/{{ name }}/{{ name }}/-/archive/v{{ version }}/{{ name }}-v{{ version }}.tar.gz
-  sha256: cd63882b74d7f808eca029bd4b8a986174c72329e50b957e7f50b0c81bd503f3
+  sha256: 55f485c9b920de393715f9bce2499c34226e53639d9a206114f7f14cf6985ee1
 
 build:
-  number: 3
+  number: 0
   skip: true  # [win]
 
 requirements:
