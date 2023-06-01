@@ -14,7 +14,7 @@ source:
 
 build:
   skip: true  # [win]
-  number: 0
+  number: 1
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
     - MHM_BUILD_PARALLEL=1                   # [build_platform == target_platform]
