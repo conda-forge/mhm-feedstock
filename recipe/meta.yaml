@@ -16,7 +16,7 @@ build:
   skip: true  # [win]
   number: 0
   script_env:
-    - SETUPTOOLS_SCM_PRETEND_VERSION={{version}}
+    - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
     - MHM_BUILD_PARALLEL=1                   # [build_platform == target_platform]
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv

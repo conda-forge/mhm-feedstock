@@ -1,13 +1,18 @@
 --- pybind/mhm/CMakeLists.txt
 +++ pybind/mhm/CMakeLists.txt
-@@ -63,6 +63,12 @@ target_include_directories(${f2py_module_name}
+@@ -63,6 +63,17 @@ target_include_directories(${f2py_module_name}
    ${PYTHON_INCLUDE_DIRS}
  )
 
 +# some fortran flags are not ignored by clang
-+# https://stackoverflow.com/q/61854160/6696397
++# https://stackoverflow.com/q/21617158/6696397
 +if(CMAKE_C_COMPILER_ID MATCHES "Clang")
-+  target_compile_options(${f2py_module_name} PUBLIC -Qunused-arguments)
++  target_compile_options(${f2py_module_name} PUBLIC
++    -Qunused-arguments
++    -Wno-error=unused-command-line-argument-hard-error-in-future
++    -Wno-error=unused-command-line-argument
++    -Wno-unused-command-line-argument
++  )
 +endif()
 +
  # ensure correct name of python extension
