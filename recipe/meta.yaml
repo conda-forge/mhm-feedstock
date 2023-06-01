@@ -13,8 +13,8 @@ build:
   skip: true  # [win]
   number: 0
   script_env:
-    - MHM_BUILD_PARALLEL=1               # [build_platform == target_platform]
-    - CMAKE_GENERATOR="Ninja"
+    - MHM_BUILD_PARALLEL=1                   # [build_platform == target_platform]
+    - SKBUILD_CONFIGURE_OPTIONS="-GNinja"
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
