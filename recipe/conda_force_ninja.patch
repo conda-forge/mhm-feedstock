@@ -1,0 +1,11 @@
+--- setup.py
++++ setup.py
+@@ -74,6 +74,8 @@ else:
+     cmake_args += ["-DBUILD_MHM_DRIVER=OFF"]
+     print("## mHM Python setup: no console script for mHM driver")
+
++cmake_args += ["-GNinja"]
++
+ skbuild.setup(
+     packages=["mhm"],
+     package_dir={"": "pybind"},
