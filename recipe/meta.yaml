@@ -34,7 +34,7 @@ requirements:
   host:
     - pip
     - python
-    - scikit-build>=0.16, <0.17
+    - scikit-build >=0.16, <0.17
     - setuptools >=63, <64
     - setuptools_scm >=7, <8
     - numpy
