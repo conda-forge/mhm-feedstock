@@ -39,7 +39,8 @@ requirements:
     - pip
     - python
     - scikit-build >=0.16, <0.17
-    - setuptools >=63, <64
+    - setuptools >=63, <64  # [py<311]
+    - setuptools >=63, <66  # [py>=311]
     - setuptools_scm >=7, <8
     - numpy
     - fypp
