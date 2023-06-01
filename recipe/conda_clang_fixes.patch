@@ -1,19 +1,24 @@
 --- pybind/mhm/CMakeLists.txt
 +++ pybind/mhm/CMakeLists.txt
-@@ -63,6 +63,17 @@ target_include_directories(${f2py_module_name}
+@@ -1,3 +1,11 @@
++macro(remove_flag_from_target _target _flag)
++    get_target_property(_target_flags ${_target} COMPILE_OPTIONS)
++    if(_target_flags)
++        list(REMOVE_ITEM _target_flags ${_flag})
++        set_target_properties(${_target} PROPERTIES COMPILE_OPTIONS "${_target_flags}")
++    endif()
++endmacro()
++
+ enable_language(C)
+ find_package(PythonExtensions REQUIRED)
+ find_package(NumPy REQUIRED)
+@@ -63,6 +71,10 @@ target_include_directories(${f2py_module_name}
    ${PYTHON_INCLUDE_DIRS}
  )
 
-+# some fortran flags are not ignored by clang
-+# https://stackoverflow.com/q/21617158/6696397
-+if(CMAKE_C_COMPILER_ID MATCHES "Clang")
-+  target_compile_options(${f2py_module_name} PUBLIC
-+    -Qunused-arguments
-+    -Wno-error=unused-command-line-argument-hard-error-in-future
-+    -Wno-error=unused-command-line-argument
-+    -Wno-unused-command-line-argument
-+  )
-+endif()
++# remove fortran specific flags
++remove_flag_from_target(${f2py_module_name} -ffree-form)
++remove_flag_from_target(${f2py_module_name} -ffixed-line-length-132)
 +
  # ensure correct name of python extension
  set_target_properties(${f2py_module_name} PROPERTIES SUFFIX ${PYTHON_EXTENSION_MODULE_SUFFIX})
