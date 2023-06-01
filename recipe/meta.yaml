@@ -1,43 +1,59 @@
 {% set name = "mhm" %}
-{% set version = "5.12.0" %}
+{% set version = "5.13.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://git.ufz.de/{{ name }}/{{ name }}/-/archive/v{{ version }}/{{ name }}-v{{ version }}.tar.gz
-  sha256: 55f485c9b920de393715f9bce2499c34226e53639d9a206114f7f14cf6985ee1
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: e101666acf53e6b8b5df84434fd5220518de046145d85e1c7c65e9049a794544
 
 build:
-  number: 0
   skip: true  # [win]
+  number: 0
+  script_env:
+    - MHM_BUILD_PARALLEL=1               # [build_platform == target_platform]
+  script:
+    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   build:
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - numpy                                  # [build_platform != target_platform]
     - {{ compiler('fortran') }}
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - cmake
-    - make
+    - ninja
+    - fypp
     - llvm-openmp  # [osx]
     - libgomp      # [linux]
 
   host:
+    - pip
+    - python
+    - scikit-build>=0.16, <0.17
+    - setuptools >=63, <64
+    - setuptools_scm >=7, <8
+    - numpy
+    - fypp
     - netcdf-fortran
 
   run:
+    - python
+    - {{ pin_compatible('numpy') }}
     - netcdf-fortran
 
 test:
-  source_files:
-    - mhm.nml
-    - mhm_outputs.nml
-    - mhm_parameter.nml
-    - mrm_outputs.nml
-    - test_domain
-    - test_domain_2
-
   commands:
-    - mhm
+    - mhm -h
+    - mhm -V
+    - mhm-download -h
+    - mhm-download -V
+    - mhm-download -v -d 1 -p example_domain
+    - mhm example_domain
 
 about:
   home: https://www.ufz.de/mhm
