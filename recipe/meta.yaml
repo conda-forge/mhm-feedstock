@@ -11,6 +11,7 @@ source:
   patches:
     - conda_clang_fixes.patch
     - conda_force_ninja.patch
+    - conda_numpy_find.patch
 
 build:
   skip: true  # [win]
