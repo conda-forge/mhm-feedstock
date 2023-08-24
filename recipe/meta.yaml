@@ -15,6 +15,8 @@ build:
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
     - MHM_BUILD_PARALLEL=1                   # [build_platform == target_platform]
+    - CMAKE_GENERATOR=Ninja
+    - CMAKE_BUILD_PARALLEL_LEVEL=4
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
