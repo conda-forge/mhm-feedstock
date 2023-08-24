@@ -1,5 +1,5 @@
 {% set name = "mhm" %}
-{% set version = "5.13.0" %}
+{% set version = "5.13.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,17 +7,17 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: e101666acf53e6b8b5df84434fd5220518de046145d85e1c7c65e9049a794544
-  patches:
-    - conda_clang_fixes.patch
-    - conda_force_ninja.patch
+  sha256: acd61f906a6c66b0bee71a22d14b5574ad6aa952b626d7b77e65384928823a24
 
 build:
   skip: true  # [win]
-  number: 1
+  number: 0
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
     - MHM_BUILD_PARALLEL=1                   # [build_platform == target_platform]
+    - CMAKE_GENERATOR=Ninja
+    - CMAKE_BUILD_PARALLEL_LEVEL=4
+    - SKBUILD_CMAKE_ARGS="-GNinja"
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
@@ -38,9 +38,7 @@ requirements:
   host:
     - pip
     - python
-    - scikit-build >=0.16, <0.17
-    - setuptools >=63, <64  # [py<311]
-    - setuptools >=63, <66  # [py>=311]
+    - scikit-build-core >=0.5, <0.6
     - setuptools_scm >=7, <8
     - numpy
     - fypp
