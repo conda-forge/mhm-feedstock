@@ -17,7 +17,7 @@ build:
     - MHM_BUILD_PARALLEL=1                   # [build_platform == target_platform]
     - CMAKE_GENERATOR=Ninja
     - CMAKE_BUILD_PARALLEL_LEVEL=4
-    - SKBUILD_CMAKE_ARGS="-GNinja"
+    - SKBUILD_CMAKE_ARGS="-GNinja -DPython_EXECUTABLE=$PYTHON"
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
