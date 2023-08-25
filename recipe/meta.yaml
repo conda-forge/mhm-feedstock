@@ -25,7 +25,7 @@ requirements:
   build:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - numpy                                  # [build_platform != target_platform]
+    - numpy
     - {{ compiler('fortran') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
@@ -41,6 +41,8 @@ requirements:
     - scikit-build-core >=0.5, <0.6
     - setuptools_scm >=7, <8
     - numpy
+    - cmake
+    - ninja
     - fypp
     - netcdf-fortran
 
