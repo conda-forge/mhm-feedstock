@@ -12,11 +12,11 @@ source:
     - no_find_numpy.patch
 
 build:
-  skip: true  # [win or (build_platform != target_platform and python_impl == 'pypy')]
+  skip: true  # [win or (python_impl == 'pypy' and (aarch64 or ppc64le))]
   number: 1
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
-    - MHM_BUILD_PARALLEL=1                   # [build_platform == target_platform]
+    - MHM_BUILD_PARALLEL=1
     - CMAKE_BUILD_PARALLEL_LEVEL=4
     - SKBUILD_CMAKE_ARGS="-GNinja"
   script:
@@ -42,8 +42,6 @@ requirements:
     - scikit-build-core >=0.5, <0.6
     - setuptools_scm >=7, <8
     - numpy
-    - cmake
-    - ninja
     - fypp
     - netcdf-fortran
 
