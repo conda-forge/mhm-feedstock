@@ -19,6 +19,7 @@ build:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
     - MHM_BUILD_PARALLEL=1                   # [build_platform == target_platform]
     - CMAKE_BUILD_PARALLEL_LEVEL=4
+    - SKBUILD_CMAKE_ARGS="-GNinja"
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
