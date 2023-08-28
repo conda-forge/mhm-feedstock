@@ -1,7 +1,0 @@
-diff --git a/PreLoad.cmake b/PreLoad.cmake
-new file mode 100644
-index 00000000..342367fd
---- /dev/null
-+++ b/PreLoad.cmake
-@@ -0,0 +1 @@
-+set (CMAKE_GENERATOR "Ninja" CACHE INTERNAL "" FORCE)
