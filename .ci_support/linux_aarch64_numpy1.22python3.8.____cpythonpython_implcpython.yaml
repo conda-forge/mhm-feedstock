@@ -1,25 +1,27 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '11.0'
+BUILD:
+- aarch64-conda_cos7-linux-gnu
 c_compiler:
-- clang
+- gcc
 c_compiler_version:
-- '15'
+- '12'
+cdt_arch:
+- aarch64
+cdt_name:
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- clangxx
+- gxx
 cxx_compiler_version:
-- '15'
+- '12'
+docker_image:
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 fortran_compiler:
 - gfortran
 fortran_compiler_version:
 - '12'
-llvm_openmp:
-- '15'
-macos_machine:
-- arm64-apple-darwin20.0.0
 netcdf_fortran:
 - '4.6'
 numpy:
@@ -33,7 +35,7 @@ python:
 python_impl:
 - cpython
 target_platform:
-- osx-arm64
+- linux-aarch64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
