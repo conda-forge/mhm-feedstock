@@ -1,0 +1,21 @@
+diff --git a/pybind/src/CMakeLists.txt b/pybind/src/CMakeLists.txt
+index 3cbff172..e7a74f67 100644
+--- a/pybind/src/CMakeLists.txt
++++ b/pybind/src/CMakeLists.txt
+@@ -1,6 +1,6 @@
+ cmake_minimum_required(VERSION 3.17.2...3.24)
+ enable_language(C)
+-find_package(Python REQUIRED COMPONENTS Interpreter Development.Module NumPy)
++find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
+ 
+ if(${SKBUILD_STATE} MATCHES "editable")
+   set(mhm_install_dir "${CMAKE_CURRENT_SOURCE_DIR}/mhm")
+@@ -69,7 +69,7 @@ python_add_library(${f2py_module_name}
+ 
+ # link mhm to wrapper
+ target_include_directories(${f2py_module_name} PUBLIC ${F2PY_INCLUDE_DIR})
+-target_link_libraries(${f2py_module_name} PUBLIC mhm_lib Python::NumPy)
++target_link_libraries(${f2py_module_name} PUBLIC mhm_lib)
+ 
+ # linker flags (rpath)
+ if (UNIX)
