@@ -9,11 +9,10 @@ source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: acd61f906a6c66b0bee71a22d14b5574ad6aa952b626d7b77e65384928823a24
   patches:
-    - force_ninja.patch
     - no_find_numpy.patch
 
 build:
-  skip: true  # [win]
+  skip: true  # [win or (build_platform != target_platform and python_impl == 'pypy')]
   number: 1
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
