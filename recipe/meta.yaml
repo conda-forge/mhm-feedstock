@@ -13,7 +13,7 @@ source:
 
 build:
   skip: true  # [win or (python_impl == 'pypy' and (aarch64 or ppc64le))]
-  number: 3
+  number: 4
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
     - MHM_BUILD_PARALLEL=1
@@ -48,7 +48,6 @@ requirements:
 
   run:
     - python
-    - {{ pin_compatible('numpy') }}
     - netcdf-fortran
 
 test:
