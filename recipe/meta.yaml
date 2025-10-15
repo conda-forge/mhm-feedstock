@@ -1,5 +1,5 @@
 {% set name = "mhm" %}
-{% set version = "5.13.1" %}
+{% set version = "5.13.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,18 +7,14 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: acd61f906a6c66b0bee71a22d14b5574ad6aa952b626d7b77e65384928823a24
-  patches:
-    - no_find_numpy.patch
+  sha256: 1c4244ee58f9c6c20ed9e4d5691132f3f67026992bad48b359f2d44ed7e5d4ef
 
 build:
-  skip: true  # [win or (python_impl == 'pypy' and (aarch64 or ppc64le))]
-  number: 5
+  number: 0
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
-    - MHM_BUILD_PARALLEL=1
+    - MHM_BUILD_PARALLEL=1  # [not win]
     - CMAKE_BUILD_PARALLEL_LEVEL=4
-    - SKBUILD_CMAKE_ARGS="-GNinja"
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
@@ -27,10 +23,12 @@ requirements:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
-    - {{ compiler('fortran') }}
-    - {{ compiler('c') }}
-    - {{ stdlib("c") }}
-    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}  # [unix]
+    - {{ compiler('c') }}  # [unix]
+    - {{ stdlib("c") }}  # [unix]
+    - {{ compiler('m2w64_fortran') }}  # [win]
+    - {{ compiler('m2w64_c') }}  # [win]
+    - {{ stdlib('m2w64_c') }}  # [win]
     - cmake
     - ninja
     - fypp
@@ -40,8 +38,8 @@ requirements:
   host:
     - pip
     - python
-    - scikit-build-core >=0.5, <0.6
-    - setuptools_scm >=7, <8
+    - scikit-build-core <0.12
+    - setuptools_scm
     - numpy
     - fypp
     - netcdf-fortran
@@ -51,13 +49,22 @@ requirements:
     - netcdf-fortran
 
 test:
+  imports:
+    - mhm
+  requires:
+    - pytest
+    - xarray
+    - netcdf4
+  source_files:
+    - pybind/tests
   commands:
-    - mhm -h
-    - mhm -V
-    - mhm-download -h
-    - mhm-download -V
-    - mhm-download -v -d 1 -p example_domain
-    - mhm example_domain
+    - pytest -vv pybind/tests
+    - mhm -h  # [not win]
+    - mhm -V  # [not win]
+    - mhm-download -h  # [not win]
+    - mhm-download -V  # [not win]
+    - mhm-download -v -d 1 -p example_domain  # [not win]
+    - mhm example_domain  # [not win]
 
 about:
   home: https://www.ufz.de/mhm
