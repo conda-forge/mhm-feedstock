@@ -55,7 +55,6 @@ test:
     - pytest
     - xarray
     - netcdf4
-    - python {{ python_min }}
   source_files:
     - pybind/tests
   commands:
