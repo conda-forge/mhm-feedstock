@@ -10,13 +10,16 @@ source:
   sha256: 1c4244ee58f9c6c20ed9e4d5691132f3f67026992bad48b359f2d44ed7e5d4ef
 
 build:
-  number: 0
+  number: 1
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
     - MHM_BUILD_PARALLEL=1  # [not win]
     - CMAKE_BUILD_PARALLEL_LEVEL=4
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
+  entry_points:
+    - mhm = mhm.cli:mhm
+    - mhm-download = mhm.download:cli
 
 requirements:
   build:
@@ -59,12 +62,12 @@ test:
     - pybind/tests
   commands:
     - pytest -vv pybind/tests
-    - mhm -h  # [not win]
-    - mhm -V  # [not win]
-    - mhm-download -h  # [not win]
-    - mhm-download -V  # [not win]
-    - mhm-download -v -d 1 -p example_domain  # [not win]
-    - mhm example_domain  # [not win]
+    - mhm -h
+    - mhm -V
+    - mhm-download -h
+    - mhm-download -V
+    - mhm-download -v -d 1 -p example_domain
+    - mhm example_domain
 
 about:
   home: https://www.ufz.de/mhm
