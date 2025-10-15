@@ -1,5 +1,5 @@
 {% set name = "mhm" %}
-{% set version = "5.13.1" %}
+{% set version = "5.13.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,13 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: acd61f906a6c66b0bee71a22d14b5574ad6aa952b626d7b77e65384928823a24
+  sha256: 1c4244ee58f9c6c20ed9e4d5691132f3f67026992bad48b359f2d44ed7e5d4ef
   patches:
     - no_find_numpy.patch
 
 build:
   skip: true  # [win or (python_impl == 'pypy' and (aarch64 or ppc64le))]
-  number: 5
+  number: 0
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
     - MHM_BUILD_PARALLEL=1
