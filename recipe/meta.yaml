@@ -49,13 +49,23 @@ requirements:
     - netcdf-fortran
 
 test:
+  imports:
+    - mhm
+  requires:
+    - pytest
+    - xarray
+    - netcdf4
+    - python {{ python_min }}
+  source_files:
+    - pybind/tests
   commands:
-    - mhm -h
-    - mhm -V
-    - mhm-download -h
-    - mhm-download -V
-    - mhm-download -v -d 1 -p example_domain
-    - mhm example_domain
+    - pytest -vv pybind/tests
+    - mhm -h  # [not win]
+    - mhm -V  # [not win]
+    - mhm-download -h  # [not win]
+    - mhm-download -V  # [not win]
+    - mhm-download -v -d 1 -p example_domain  # [not win]
+    - mhm example_domain  # [not win]
 
 about:
   home: https://www.ufz.de/mhm
