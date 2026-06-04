@@ -10,7 +10,7 @@ source:
   sha256: 1c4244ee58f9c6c20ed9e4d5691132f3f67026992bad48b359f2d44ed7e5d4ef
 
 build:
-  number: 1
+  number: 2
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
     - MHM_BUILD_PARALLEL=1  # [not win]
@@ -26,12 +26,9 @@ requirements:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
-    - {{ compiler('fortran') }}  # [unix]
-    - {{ compiler('c') }}  # [unix]
-    - {{ stdlib("c") }}  # [unix]
-    - {{ compiler('m2w64_fortran') }}  # [win]
-    - {{ compiler('m2w64_c') }}  # [win]
-    - {{ stdlib('m2w64_c') }}  # [win]
+    - {{ stdlib("c") }}
+    - {{ compiler("c") }}
+    - {{ compiler("fortran") }}
     - cmake
     - ninja
     - fypp
