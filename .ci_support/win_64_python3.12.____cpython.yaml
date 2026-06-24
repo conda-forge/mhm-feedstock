@@ -3,7 +3,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 libnetcdf:
-- 4.9.3
+- 4.10.0
 m2w64_c_compiler:
 - gcc
 m2w64_c_compiler_version:
