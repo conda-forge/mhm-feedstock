@@ -1,5 +1,5 @@
 {% set name = "mhm" %}
-{% set version = "5.13.2" %}
+{% set version = "5.13.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,12 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 1c4244ee58f9c6c20ed9e4d5691132f3f67026992bad48b359f2d44ed7e5d4ef
+  sha256: 452fcfe4e6388ca5f77b64a07c56e534b7824d255841992935d7ae907d111ae7
 
 build:
-  number: 2
+  number: 0
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
-    - MHM_BUILD_PARALLEL=1  # [not win]
     - CMAKE_BUILD_PARALLEL_LEVEL=4
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
@@ -32,8 +31,6 @@ requirements:
     - cmake
     - ninja
     - fypp
-    - llvm-openmp  # [osx]
-    - libgomp      # [linux]
 
   host:
     - pip
@@ -42,11 +39,12 @@ requirements:
     - setuptools_scm
     - numpy
     - fypp
-    - netcdf-fortran
+    - libnetcdf
 
   run:
     - python
-    - netcdf-fortran
+    - numpy
+    - libnetcdf
 
 test:
   imports:
