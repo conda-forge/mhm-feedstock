@@ -56,13 +56,13 @@ test:
   source_files:
     - pybind/tests
   commands:
-    - pytest -vv pybind/tests
     - mhm -h
     - mhm -V
     - mhm-download -h
     - mhm-download -V
     - mhm-download -v -d 1 -p example_domain
     - mhm example_domain
+    - pytest -vv pybind/tests
 
 about:
   home: https://www.ufz.de/mhm
