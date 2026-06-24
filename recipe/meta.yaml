@@ -13,7 +13,6 @@ build:
   number: 0
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
-    - MHM_BUILD_PARALLEL=1  # [not win]
     - CMAKE_BUILD_PARALLEL_LEVEL=4
   script:
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
@@ -35,8 +34,6 @@ requirements:
     - cmake
     - ninja
     - fypp
-    - llvm-openmp  # [osx]
-    - libgomp      # [linux]
 
   host:
     - pip
@@ -45,11 +42,12 @@ requirements:
     - setuptools_scm
     - numpy
     - fypp
-    - netcdf-fortran
+    - libnetcdf
 
   run:
     - python
-    - netcdf-fortran
+    - numpy
+    - libnetcdf
 
 test:
   imports:
