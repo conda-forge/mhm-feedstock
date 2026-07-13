@@ -10,7 +10,7 @@ source:
   sha256: 452fcfe4e6388ca5f77b64a07c56e534b7824d255841992935d7ae907d111ae7
 
 build:
-  number: 0
+  number: 1
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
     - CMAKE_BUILD_PARALLEL_LEVEL=4
