@@ -11,6 +11,7 @@ source:
 
 build:
   number: 1
+  skip: true  # [py < 311]
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
     - CMAKE_BUILD_PARALLEL_LEVEL=4
