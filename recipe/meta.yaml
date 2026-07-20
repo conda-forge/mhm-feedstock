@@ -16,6 +16,8 @@ build:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
     - CMAKE_BUILD_PARALLEL_LEVEL=4
   script:
+    - set "FFLAGS=%FFLAGS% -mmlir -fdynamic-heap-array"  # [win]
+    - echo FFLAGS=%FFLAGS%                               # [win]
     - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   entry_points:
     - mhm = mhm.cli:mhm
