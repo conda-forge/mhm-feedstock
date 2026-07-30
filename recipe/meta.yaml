@@ -1,5 +1,5 @@
 {% set name = "mhm" %}
-{% set version = "5.13.3" %}
+{% set version = "5.13.4" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 452fcfe4e6388ca5f77b64a07c56e534b7824d255841992935d7ae907d111ae7
+  sha256: b984011f24578ccd13ebc41e677b150b548659fd3fbd830849db45db1437a0fb
 
 build:
-  number: 2
+  number: 1
   skip: true  # [py < 311]
   script_env:
     - SETUPTOOLS_SCM_PRETEND_VERSION={{ version }}
